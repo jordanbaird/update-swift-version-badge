@@ -1,0 +1,15 @@
+name: Update Swift Version Badge
+description: "Automatically updates the Swift version badge in the repository's README file to whatever swift-tools-version is in the repository's Package.swift file."
+inputs:
+  commit-message:
+    description: 'The message for the commit.'
+    required: false
+    default: 'Update Swift version'
+runs:
+  using: "composite"
+  steps:
+    - run: $GITHUB_ACTION_PATH/update-swift-version.sh
+      shell: bash
+    - uses: EndBug/add-and-commit@v9.0.0
+      with:
+        message: ${{ inputs.commit-message }}
